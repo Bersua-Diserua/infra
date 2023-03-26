@@ -6,3 +6,49 @@ services:
     restart: always
     networks:
       - server_load_balancer
+    environment:
+      - PORT=4000
+      - BACKEND=be-service:4000
+
+  be-service:
+    image: bersuadiserua22/be-service:latest
+    restart: always
+    networks:
+      - server_load_balancer
+
+  redis:
+    container_name: redis
+    image: redis:6.2.7-bullseye
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    restart: always
+    networks:
+      - redis_network
+
+  redis-commander:
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: "rabbitmq-local"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./docker/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./docker/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_net
+
+redis_network:
+  driver: bridge
