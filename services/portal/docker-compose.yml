@@ -50,5 +50,6 @@ services:
     networks:
       - rabbitmq_net
 
-redis_network:
-  driver: bridge
+networks:
+  redis_network:
+    driver: bridge
