@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  web-portal:
+    image: bersuadiserua22/portal-web:latest
+    restart: always
+    networks:
+      - server_load_balancer
