@@ -47,8 +47,6 @@ services:
     volumes:
       - ./docker/rabbitmq/data/:/var/lib/rabbitmq/
       - ./docker/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-      - rabbitmq_net
 
 networks:
   redis_network:
