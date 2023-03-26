@@ -9,12 +9,17 @@ services:
     environment:
       - PORT=4000
       - BACKEND=be-service:4000
+    depends_on:
+      - be-service
 
   be-service:
     image: bersuadiserua22/be-service:latest
     restart: always
     networks:
       - server_load_balancer
+    depends_on:
+      - redis
+      - rabbitmq
 
   redis:
     container_name: redis
@@ -37,6 +42,8 @@ services:
       - REDIS_HOSTS=local:redis:6379
     ports:
       - "8081:8081"
+    depends_on:
+      - redis
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -46,7 +53,7 @@ services:
       - 15672:15672
     volumes:
       - ./docker/rabbitmq/data/:/var/lib/rabbitmq/
-      - ./docker/rabbitmq/log/:/var/log/rabbitmq
+      # - ./docker/rabbitmq/log/:/var/log/rabbitmq
 
 networks:
   redis_network:
