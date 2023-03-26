@@ -51,3 +51,5 @@ services:
 networks:
   redis_network:
     driver: bridge
+  server_load_balancer:
+    external: true
