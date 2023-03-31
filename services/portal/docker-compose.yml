@@ -22,6 +22,8 @@ services:
     depends_on:
       - redis
       - rabbitmq
+    ports:
+      - "4000:4000"
 
   redis:
     container_name: redis
