@@ -11,6 +11,8 @@ services:
       - BACKEND=be-service:4000
     depends_on:
       - be-service
+    ports:
+      - "5000:4000"
 
   be-service:
     image: bersuadiserua22/be-service:latest
