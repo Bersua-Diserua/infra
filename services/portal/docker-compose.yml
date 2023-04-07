@@ -20,7 +20,8 @@ services:
     image: bersuadiserua22/be-service:latest
     restart: always
     environment:
-      - RABBITMQ_URI=amqp://localhost:5672
+      - RABBITMQ_URI=amqp://rabbitmq:5672
+      - REDIS_HOST=redis
     networks:
       - server_load_balancer
       - redis_network
