@@ -20,7 +20,7 @@ services:
     image: bersuadiserua22/be-service:latest
     restart: always
     environment:
-      - RABBITMQ_URI=amqp://rabbitmq:5672
+      - RABBITMQ_URI=amqp://localhost:5672
       - REDIS_HOST=redis
     networks:
       - server_load_balancer
@@ -28,7 +28,6 @@ services:
       - rabbit_mq
     depends_on:
       - redis
-      - rabbitmq
     ports:
       - "4000:4000"
 
@@ -57,23 +56,6 @@ services:
       - redis
     networks:
       - redis_network
-
-  rabbitmq:
-    platform: linux/x86_64
-    image: rabbitmq:3-management-alpine
-    healthcheck:
-      test: rabbitmq-diagnostics -q ping
-      interval: 30s
-      timeout: 30s
-      retries: 3
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - ./docker/rabbitmq/data/:/var/lib/rabbitmq/
-      # - ./docker/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-      - rabbit_mq
 
 networks:
   redis_network:
