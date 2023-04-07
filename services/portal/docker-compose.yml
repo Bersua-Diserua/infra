@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   web-portal:
+    platform: linux/x86_64
     image: bersuadiserua22/portal-web:latest
     restart: always
     networks:
@@ -15,6 +16,7 @@ services:
       - "5000:4000"
 
   be-service:
+    platform: linux/x86_64
     image: bersuadiserua22/be-service:latest
     restart: always
     environment:
@@ -54,6 +56,7 @@ services:
       - redis_network
 
   rabbitmq:
+    platform: linux/x86_64
     image: rabbitmq:3-management-alpine
     container_name: "rabbitmq-local"
     ports:
