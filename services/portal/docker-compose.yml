@@ -61,7 +61,6 @@ services:
   rabbitmq:
     platform: linux/x86_64
     image: rabbitmq:3-management-alpine
-    container_name: "rabbitmq-local"
     ports:
       - 5672:5672
       - 15672:15672
