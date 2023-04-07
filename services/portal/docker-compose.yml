@@ -21,9 +21,10 @@ services:
     restart: always
     environment:
       - RABBITMQ_URI=amqp://rabbitmq:5672
-      - REDIS_HOST=local:redis
+      - REDIS_HOST=redis
     networks:
       - server_load_balancer
+      - redis_network
     depends_on:
       - redis
       - rabbitmq
