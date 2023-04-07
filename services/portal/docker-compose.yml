@@ -20,11 +20,11 @@ services:
     image: bersuadiserua22/be-service:latest
     restart: always
     environment:
-      - RABBITMQ_URI=amqp://rabbitmq:5672
-      - REDIS_HOST=redis
+      - RABBITMQ_URI=amqp://localhost:5672
     networks:
       - server_load_balancer
       - redis_network
+      - rabbit_mq
     depends_on:
       - redis
       - rabbitmq
@@ -67,9 +67,13 @@ services:
     volumes:
       - ./docker/rabbitmq/data/:/var/lib/rabbitmq/
       # - ./docker/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbit_mq
 
 networks:
   redis_network:
     driver: bridge
   server_load_balancer:
     external: true
+  rabbit_mq:
+    driver: bridge
