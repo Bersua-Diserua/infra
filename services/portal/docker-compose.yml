@@ -62,3 +62,5 @@ networks:
     driver: bridge
   server_load_balancer:
     external: true
+  rabbit_mq:
+    external: true
