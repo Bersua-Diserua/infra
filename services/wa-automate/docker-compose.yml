@@ -10,10 +10,9 @@ services:
       - redis_network
       - server_load_balancer
     environment:
-      - RABBITMQ_URI=amqp://localhost:5672
-      - BE_SERVER=http://localhost:4000
-      - REDIS_HOST=localhost
-      - REDIS_PORT=6379
+      - RABBITMQ_URI=amqp://rabbitmq:5672
+      - BE_SERVER=http://be-service:4000
+      - REDIS_HOST=redis
 
 networks:
   rabbit_mq:
