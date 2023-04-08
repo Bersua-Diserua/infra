@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  wa-automate:
+    platform: linux/x86_64
+    image: bersuadiserua22/wa-automate:latest
+    restart: always
+    networks:
+      - rabbit_mq
+      - redis_network
+      - server_load_balancer
+    environment:
+      - RABBITMQ_URI='amqp://localhost:5672'
+      - BE_SERVER="http://localhost:4000"
+      - REDIS_HOST="localhost"
+      - REDIS_PORT=6379
+
+networks:
+  rabbit_mq:
+    external: true
+  redis_network:
+    external: true
+  server_load_balancer:
+    external: true
