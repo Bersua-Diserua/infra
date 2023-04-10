@@ -13,6 +13,8 @@ services:
       - RABBITMQ_URI=amqp://rabbitmq:5672
       - BE_SERVER=http://be-service:4000
       - REDIS_HOST=redis
+    volumes:
+      - ./session:/app/session
 
 networks:
   rabbit_mq:
