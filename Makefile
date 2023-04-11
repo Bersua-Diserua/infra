@@ -9,5 +9,4 @@ portal:
 	cd $(CURRENTDIR)/services/portal; make re-run
 
 wa-restart:
-	cd $(CURRENTDIR)/services/wa-automate &&
-	docker compose restart
+	cd $(CURRENTDIR)/services/wa-automate && docker compose restart
