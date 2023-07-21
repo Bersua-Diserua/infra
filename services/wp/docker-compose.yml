@@ -5,8 +5,8 @@ services:
     image: mysql:5.7.29
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=pwd
-      - MYSQL_ROOT_HOST=%
+      MYSQL_ROOT_PASSWORD: pwd
+      MYSQL_ROOT_HOST: %
     ports:
       - 3306:3306
     volumes:
@@ -17,6 +17,9 @@ services:
     restart: always
     environment:
       WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: pwd
+      WORDPRESS_DB_NAME: serua_main
     networks:
       - server_load_balancer
     ports:
