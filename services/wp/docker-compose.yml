@@ -22,11 +22,15 @@ services:
       WORDPRESS_DB_NAME: serua_main
     networks:
       - server_load_balancer
+      - mysql_network
     ports:
       - "9000:80"
     depends_on:
       - mysql
 
 networks:
+  mysql_network:
+    driver: bridge
+    name: mysql_network
   server_load_balancer:
     external: true
