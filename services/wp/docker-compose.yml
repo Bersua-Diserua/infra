@@ -6,11 +6,13 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: pwd
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_HOST: "%"
     ports:
       - 3306:3306
     volumes:
       - ./docker/mysql/:/var/lib/mysql
+    networks:
+      - mysql_network
   wp:
     platform: linux/x86_64
     image: bersuadiserua22/wp:latest
