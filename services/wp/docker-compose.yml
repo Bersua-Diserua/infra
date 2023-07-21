@@ -1,14 +1,28 @@
 version: "3.8"
 
 services:
+  mysql:
+    image: mysql:5.7.29
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=pwd
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/:/var/lib/mysql
   wp:
     platform: linux/x86_64
     image: bersuadiserua22/wp:latest
     restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
     networks:
       - server_load_balancer
     ports:
       - "9000:80"
+    depends_on:
+      - mysql
 
 networks:
   server_load_balancer:
