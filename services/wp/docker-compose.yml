@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  web-portal:
+    platform: linux/x86_64
+    image: bersuadiserua22/wp:latest
+    restart: always
+    networks:
+      - server_load_balancer
+    ports:
+      - "80:80"
+
+networks:
+  server_load_balancer:
+    external: true
